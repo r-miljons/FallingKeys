@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.game-section {
+    display: flex;
+    background: url("../assets/bluesky.jpg") no-repeat center center fixed;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.start-game {
+    position: absolute;
+    width: 60%;
+    animation: idle 3s infinite ;
+}
+
+.start-game h1 {
+    font-family:'Fredoka One', sans-serif;
+    color:rgb(111, 68, 23);
+    text-align: center;
+    font-size: 3vw;
+}
+
+@keyframes idle {
+    0% {
+        bottom: 40vh;
+        animation-timing-function: ease-out;
+    }
+    25% {
+        bottom: 41vh;
+        animation-timing-function: ease-in;
+    }
+    50% {
+        bottom: 40vh;
+        animation-timing-function: ease-out;
+    }
+    75% {
+        bottom: 39vh;
+        animation-timing-function: ease-in;
+    }
+    100% {
+        bottom: 40vh;
+    }
+}
+
+/* keys section */
+
+.keys-section {
+    display: flex;
+    width: 100%;
+    align-self: flex-start;
+    margin-top: 20vh;
+    margin-left: 20vw;
+}
+
+.keys {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    
+}
+
+.key {
+    background-color: rgba(255, 255, 255, 0.758);
+    padding: 1vw 2.5vw;
+    border-radius: 1.5vw;
+    border: 0.4vw solid black;
+    position: relative;
+    transition: all 0.5s;
+}
+
+.char {
+    font-size: 5vw;
+    font-family: 'Fredoka One', sans-serif;
+}
+
+.one {
+    animation: fallDown 3s linear infinite;
+    animation: keyPop 1s 0;
+    
+}
+
+.two {
+    opacity: 1;
+}
+
+.three {
+    opacity: 0.6;
+}
+
+.four {
+    opacity: 0.2;
+}
+
+.five {
+    opacity: 0.1;
+}
+
+@keyframes fallDown {
+    from {
+        bottom: 0vh;
+    }
+    to {
+        bottom: -70vh;
+    }
+}
+
+@keyframes keyPop {
+    0% {
+        transform: scale(1);
+    }
+    20% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}

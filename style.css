@@ -25,11 +25,14 @@ p {
     align-items: center;
     height: 100vh;
     padding: 5%;
+    perspective: 300px;
+    overflow: hidden;
 }
 
 /* start box */
 
 .start-section-container {
+    position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,6 +42,26 @@ p {
     background-color: rgba(240, 248, 255, 0.673);
     border-radius: 3vw;
     box-shadow: 0 0 1rem rgb(219, 219, 219);
+}
+
+@keyframes fallDown {
+    0% {
+        bottom: 40vh;
+        animation-timing-function: ease-out;
+        transform: rotateX(0deg) rotateY(0deg);
+        transform-style: preserve-3d; 
+    }
+    20% {
+        transform: rotateX(-10deg) rotateY(0deg);
+        transform-style: preserve-3d; 
+        bottom: 47vh; 
+        animation-timing-function: cubic-bezier(.63,.03,.77,.56);
+    }
+    100% {
+        bottom: -100vh;
+        transform: rotateX(100deg) rotateY(0deg);
+        transform-style: preserve-3d;
+    }
 }
 
 h1 {
@@ -89,4 +112,13 @@ h1 {
     width: 4rem;
     filter: invert(0);
     cursor: pointer;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
