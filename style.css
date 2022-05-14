@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-family: 'Fredoka One', sans-serif;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Start Page */
+
+#start {
+    display: flex;
+    position: relative;
+    background: url("./assets/bluesky.jpg") no-repeat center center fixed;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 5%;
+}
+
+/* start box */
+
+.start-section-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 5%;
+    background-color: rgba(240, 248, 255, 0.673);
+    border-radius: 3vw;
+    box-shadow: 0 0 1rem rgb(219, 219, 219);
+}
+
+h1 {
+    font-size: 5vw;
+    color:rgb(73, 73, 73);
+    padding-bottom: 0.5em;
+}
+
+.press-play {
+    background-color: rgba(24, 144, 249, 0.603);
+    padding: 2vw 3vw;
+    border-radius: 5vw;
+    transition: background-color 200ms;
+}
+
+.press-play:hover {
+    background-color: rgb(155,222,245);
+    cursor: pointer;
+}
+
+.start-section-container p {
+    font-size: 2.5vw;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.start-section-container p:hover {
+    cursor: pointer;
+}
+
+/* little github logo */
+
+.project {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 2rem;
+}
+
+.project img {
+    width: 4rem;
+    filter: invert(60%);
+    transition: filter 200ms;
+}
+
+.project img:hover {
+    width: 4rem;
+    filter: invert(0);
+    cursor: pointer;
+}
