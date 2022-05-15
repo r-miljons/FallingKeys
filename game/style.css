@@ -69,7 +69,6 @@
     width: 100%;
     justify-content: space-around;
     z-index: 1;
-    /* animation: slideLeft 0.2s infinite ease-in; */
 }
 
 .trail-box {
@@ -146,6 +145,15 @@
     }
     to {
         margin-left: -16vw;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        left: 0;
+    }
+    to {
+        left: 20%;
     }
 }
 
