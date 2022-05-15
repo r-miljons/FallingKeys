@@ -56,25 +56,53 @@
 
 .keys-section {
     display: flex;
+    position: relative;
     width: 100%;
     align-self: flex-start;
     margin-top: 20vh;
     margin-left: 20vw;
+    z-index: 0;
 }
 
 .keys {
     display: flex;
     width: 100%;
     justify-content: space-around;
-    
+    z-index: 1;
+    /* animation: slideLeft 0.2s infinite ease-in; */
+}
+
+.trail-box {
+    opacity: 0;
+    position: absolute;
+    height: 70vh;
+    width: 5vw;
+    margin-top: 3vh;
+    margin-left: 5.5vw;
+    border-radius: 3vw;
+    background-color: transparent;
+    overflow: hidden;
+    transition: opacity 0.2s;
+}
+
+.trail {
+    margin: 0 auto;
+    height: 70vh;
+    width: 5vw;
+    z-index: -1;
+    border-radius: 3vw;
+    transition: width 0.2s;
+    background: linear-gradient(180deg, rgba(1,255,0,1) 0%, rgba(255,208,36,1) 50%, rgba(252,69,69,1) 100%);
 }
 
 .key {
-    background-color: rgba(255, 255, 255, 0.758);
+    background-color: rgb(255, 255, 255);
+    width: 9.5vw;
     padding: 1vw 2.5vw;
     border-radius: 1.5vw;
     border: 0.4vw solid black;
     position: relative;
+    text-align: center;
     
 }
 
@@ -108,11 +136,20 @@
         bottom: 0vh;
     }
     to {
-        bottom: -70vh;
+        bottom: -70vh; /* must match fallDistance variable in JS! */
     }
 }
 
-@keyframes keyPop {
+@keyframes slideLeft {
+    from {
+        margin-left: 0;
+    }
+    to {
+        margin-left: -16vw;
+    }
+}
+
+@keyframes keyPress {
     0% {
         transform: scale(1);
     }
