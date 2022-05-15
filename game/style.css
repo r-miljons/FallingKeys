@@ -75,7 +75,7 @@
     border-radius: 1.5vw;
     border: 0.4vw solid black;
     position: relative;
-    transition: all 0.5s;
+    
 }
 
 .char {
@@ -84,9 +84,7 @@
 }
 
 .one {
-    animation: fallDown 3s linear infinite;
-    animation: keyPop 1s 0;
-    
+    opacity: 1;
 }
 
 .two {
