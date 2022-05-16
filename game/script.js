@@ -16,13 +16,15 @@ let gameStarted = false;
 
 window.onload = randomKeys(charArray);
 
-const fallingTime = 3000; // how long it takes for a key to fall
+const fallingTime = 2500; // how long it takes for a key to fall
 
 const fallDistance = 70; // must match the css value in fallDown animation;
 
 let fallingSpeed = fallDistance/fallingTime; // how many units per ms the key moves
 let startingTime; // when key starts to fall 
 let isPressed; // handles the logic of function execution
+let succeeded; // handles the logic of function execution
+let keyPressed; // stores a string value of key pressed
 let timeElapsed; // time it took to press the key
 let currentY; // position of the key at the time it was pressed
 
@@ -50,16 +52,19 @@ window.addEventListener("keypress", startGame); // removed when function called
 function startFall() {
     setTimeout(() =>{
         if (isPressed) {
+        keyPressed = null; // reset key pressed value
         keysArray = document.querySelectorAll(".key"); //update the keys array
         resetClassNames();
         keysArray[0].style.opacity = "1";
         isPressed = false;
+        succeeded = true;
         progressTrail(); //spawns a trail
         startingTime = Date.now(); // starts timer
         keysArray[0].style.animation = "fallDown " + fallingTime + "ms linear forwards";
         setTimeout(() => { 
             timeElapsed = Date.now() - startingTime;
-            if (!isPressed && fallingSpeed * timeElapsed >= 70) { //if key is not pressed
+            if (!isPressed && fallingSpeed * timeElapsed >= fallDistance) { //if key is not pressed
+                succeeded = false;
                 pressKey();
             }
         }, fallingTime);
@@ -87,7 +92,8 @@ function pressKey() {
     };
 }
 
-window.addEventListener("keypress", pressKey); // to be edited for specificity
+window.addEventListener("keydown", pressKey);
+window.addEventListener("keydown", returnPressedKey);
 
 // this is the trail that the falling key leaves behind
 
@@ -110,6 +116,7 @@ function progressTrail() {
 
 function changeKeys() {
     keysArray = document.querySelectorAll(".key"); //update the keys array
+    keyChecker();
     keysArray[0].style.animation = "keyPress "+ animationTime +"ms forwards, slideRight "+ animationTime +"ms forwards linear";
     allKeys.style.animation = "slideLeft "+ animationTime +"ms forwards linear";
     setTimeout(() => {
@@ -155,3 +162,39 @@ function randomKeys(array) {
        }  
     }
 }
+
+// changes the color of the keys
+
+function changeKeyColor() {
+    if (succeeded) {
+        keysArray[0].style.backgroundColor = "rgb(111, 255, 16)";
+        setTimeout(() => {
+            keysArray[0].style.backgroundColor = "rgb(255, 255, 255)";
+        },animationTime);
+    } else if (!succeeded) {
+        keysArray[0].style.backgroundColor = "rgb(255, 105, 55)";
+        setTimeout(() => {
+            keysArray[0].style.backgroundColor = "rgb(255, 255, 255)";
+        },animationTime);
+    }
+}
+
+// determines whether the key pressed is the correct one
+
+function returnPressedKey(event) {
+    keyPressed = event.key.toUpperCase();
+    console.log(event.key.toUpperCase());
+}
+
+function keyChecker() {
+    console.log(keyPressed);
+    console.log(keysArray[0].textContent);
+    if (keysArray[0].textContent.includes(keyPressed)) {
+        succeeded = true;
+        changeKeyColor();
+    } else {
+        succeeded = false;
+        changeKeyColor();
+    }
+}
+
