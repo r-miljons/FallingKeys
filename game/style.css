@@ -21,6 +21,7 @@
     position: absolute;
     width: 60%;
     animation: idle 3s infinite ;
+    z-index: 5;
 }
 
 .start-game h1 {
@@ -108,26 +109,6 @@
 .char {
     font-size: 5vw;
     font-family: 'Fredoka One', sans-serif;
-}
-
-.one {
-    opacity: 1;
-}
-
-.two {
-    opacity: 1;
-}
-
-.three {
-    opacity: 0.6;
-}
-
-.four {
-    opacity: 0.2;
-}
-
-.five {
-    opacity: 0.1;
 }
 
 @keyframes fallDown {

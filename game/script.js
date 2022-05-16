@@ -5,12 +5,18 @@ const allKeys = document.querySelector(".keys");
 const pressAnyKey = document.querySelector(".start-game");
 const trail = document.querySelector(".trail-box");
 let keysArray = document.querySelectorAll(".key");
+let charArray = document.querySelectorAll(".char");
+
+let charSet = "abcdefghijklmnopqrstuvwxyz".toUpperCase(); // characters to be used
+let charSetLength = charSet.length;
 
 // ---------------------------------------------------------------- 
 
 let gameStarted = false;
 
-const fallingTime = 4000; // how long it takes for a key to fall
+window.onload = randomKeys(charArray);
+
+const fallingTime = 3000; // how long it takes for a key to fall
 
 const fallDistance = 70; // must match the css value in fallDown animation;
 
@@ -20,7 +26,7 @@ let isPressed; // handles the logic of function execution
 let timeElapsed; // time it took to press the key
 let currentY; // position of the key at the time it was pressed
 
-let animationTime = 200; 
+let animationTime = 300; 
 
 //removes idle text and starts falling animation, sets gameStarted = true;
 
@@ -81,7 +87,7 @@ function pressKey() {
     };
 }
 
-window.addEventListener("keypress", pressKey);
+window.addEventListener("keypress", pressKey); // to be edited for specificity
 
 // this is the trail that the falling key leaves behind
 
@@ -104,7 +110,7 @@ function progressTrail() {
 
 function changeKeys() {
     keysArray = document.querySelectorAll(".key"); //update the keys array
-    keysArray[0].style.animation = "keyPress "+ animationTime +"ms forwards, slideRight 0.2s forwards linear";
+    keysArray[0].style.animation = "keyPress "+ animationTime +"ms forwards, slideRight "+ animationTime +"ms forwards linear";
     allKeys.style.animation = "slideLeft "+ animationTime +"ms forwards linear";
     setTimeout(() => {
         clearAnimations();
@@ -112,6 +118,7 @@ function changeKeys() {
         allKeys.style.animation = "none";
         keysArray[0].remove();
         firstCopy.style.bottom = "0"; //reset the height of the copy
+        firstCopy.children[0].textContent = randomKey();
         allKeys.appendChild(firstCopy);    
     }, animationTime);
 }
@@ -130,4 +137,21 @@ function clearAnimations() {
     keysArray[2].style.animation = "none";
     keysArray[3].style.animation = "none";
     keysArray[4].style.animation = "none";
+}
+
+// randomizes the keys
+
+function randomKey() {  
+        randomNumber = Math.floor(Math.random()*charSetLength);
+        randomChar = charSet[randomNumber];
+        return randomChar;
+}
+console.log(randomKey(keysArray[1]));
+
+function randomKeys(array) {
+    if (!gameStarted) {
+       for (let i = 0; i < array.length; i++) {
+        array[i].textContent = randomKey();
+       }  
+    }
 }
