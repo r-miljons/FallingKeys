@@ -4,6 +4,9 @@
 const allKeys = document.querySelector(".keys");
 const pressAnyKey = document.querySelector(".start-game");
 const trail = document.querySelector(".trail-box");
+const lives = document.querySelectorAll(".life");
+const gameOverScreen = document.querySelector(".game-over");
+const restartButton = document.querySelector(".restart-button");
 let keysArray = document.querySelectorAll(".key");
 let charArray = document.querySelectorAll(".char");
 
@@ -16,9 +19,11 @@ let gameStarted = false;
 
 window.onload = randomKeys(charArray);
 
-const fallingTime = 2500; // how long it takes for a key to fall
+const fallingTime = 4000; // how long it takes for a key to fall
 
 const fallDistance = 70; // must match the css value in fallDown animation;
+
+let animationTime = 300; 
 
 let fallingSpeed = fallDistance/fallingTime; // how many units per ms the key moves
 let startingTime; // when key starts to fall 
@@ -27,14 +32,14 @@ let succeeded; // handles the logic of function execution
 let keyPressed; // stores a string value of key pressed
 let timeElapsed; // time it took to press the key
 let currentY; // position of the key at the time it was pressed
+let currentLives = 5;
 
-let animationTime = 300; 
+
 
 //removes idle text and starts falling animation, sets gameStarted = true;
 
 function startGame() { 
     if (!gameStarted) {
-        window.removeEventListener("keypress", startGame);
         pressAnyKey.style.animation = "none";
         pressAnyKey.style.display = "none";
         setTimeout(() => {
@@ -45,13 +50,13 @@ function startGame() {
     } 
 }
 
-window.addEventListener("keypress", startGame); // removed when function called
+window.addEventListener("keypress", startGame);
 
 // starts falling, sets timer, loops the animation
 
 function startFall() {
     setTimeout(() =>{
-        if (isPressed) {
+        if (isPressed && currentLives > 0) {
         keyPressed = null; // reset key pressed value
         keysArray = document.querySelectorAll(".key"); //update the keys array
         resetClassNames();
@@ -119,8 +124,8 @@ function changeKeys() {
     keyChecker();
     keysArray[0].style.animation = "keyPress "+ animationTime +"ms forwards, slideRight "+ animationTime +"ms forwards linear";
     allKeys.style.animation = "slideLeft "+ animationTime +"ms forwards linear";
-    setTimeout(() => {
-        clearAnimations();
+    setTimeout(() => { // first key is copied, its content randomized, moved to the back and class names are reset
+        clearAnimations(); 
         let firstCopy = keysArray[0].cloneNode(true);
         allKeys.style.animation = "none";
         keysArray[0].remove();
@@ -187,14 +192,54 @@ function returnPressedKey(event) {
 }
 
 function keyChecker() {
-    console.log(keyPressed);
-    console.log(keysArray[0].textContent);
     if (keysArray[0].textContent.includes(keyPressed)) {
         succeeded = true;
         changeKeyColor();
     } else {
         succeeded = false;
         changeKeyColor();
+        removeLife();
     }
 }
 
+// when wrong key is pressed or no key is pressed ↓
+
+function removeLife() {
+    if (currentLives > 1) {
+        lives[currentLives - 1].style.animation = "removeLife "+animationTime+"ms 3 forwards"
+        currentLives -= 1;
+    } else if (currentLives > 0) {
+        lives[currentLives - 1].style.animation = "removeLife "+animationTime+"ms 3 forwards"
+        currentLives -= 1;
+        gameOver();
+    }
+}
+
+function restoreLives() {
+    currentLives = 5;
+    lives[0].style.animation = "none";
+    lives[1].style.animation = "none";
+    lives[2].style.animation = "none";
+    lives[3].style.animation = "none";
+    lives[4].style.animation = "none";
+}
+
+// game over
+
+function gameOver() {
+    gameStarted = false;
+    window.removeEventListener("keydown", pressKey);
+    window.removeEventListener("keydown", returnPressedKey);
+    window.removeEventListener("keypress", startGame);
+    gameOverScreen.style.display = "flex";
+    restartButton.addEventListener("click", function() {
+        window.addEventListener("keydown", pressKey);
+        window.addEventListener("keydown", returnPressedKey);
+        window.addEventListener("keypress", startGame);
+        randomKeys(charArray); // to be fixed! doesnt work here for some reason;
+        gameOverScreen.style.display = "none";
+        pressAnyKey.style.animation = "";
+        pressAnyKey.style.display = "";
+        restoreLives();
+    });
+}

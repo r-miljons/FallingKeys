@@ -6,6 +6,14 @@
     padding: 0;
 }
 
+h1 {
+    font-family:'Fredoka One', sans-serif; 
+}
+
+p {
+    font-family:'Fredoka One', sans-serif;
+}
+
 .game-section {
     display: flex;
     background: url("../assets/bluesky.jpg") no-repeat center center fixed;
@@ -25,7 +33,6 @@
 }
 
 .start-game h1 {
-    font-family:'Fredoka One', sans-serif;
     color:rgb(111, 68, 23);
     text-align: center;
     font-size: 3vw;
@@ -50,6 +57,58 @@
     }
     100% {
         bottom: 40vh;
+    }
+}
+
+/* lives */
+
+.life-box {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: space-between;
+    width: max-content;
+    height: max-content;
+    margin: 1vh 3vw;
+}
+
+.life-box p {
+    margin-right: 2vw;
+    text-transform: uppercase;
+    font-size: 2vw;
+}
+
+.lives {
+    display: flex;
+    width: max-content;
+}
+   
+
+.life {
+    
+    width: 3vw;
+    height: 3vw;
+    min-width: 20px;
+    min-height: 20px;
+    background: radial-gradient(rgb(0, 203, 37), rgb(59, 178, 0));
+    border: 5px solid rgb(61, 61, 61);
+    border-radius: 100%;
+    margin: 3px;
+}
+
+@keyframes removeLife {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.8);
+        opacity: 0.2;
     }
 }
 
@@ -150,4 +209,36 @@
         transform: scale(1.5);
         opacity: 0;
     }
+}
+
+/* game over screen */
+
+.game-over {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 4vw;
+    background-color: rgba(240, 248, 255, 0.888);
+    border-radius: 3vw;
+    box-shadow: 0 0 1rem rgb(219, 219, 219);
+    z-index: 6;
+}
+
+.game-over h1 {
+    margin-bottom: 5%;;
+}
+
+.restart-button {
+    background-color: rgba(24, 144, 249, 0.603);
+    padding: 2vw 3vw;
+    border-radius: 3vw;
+    transition: background-color 200ms;
+}
+
+.restart-button:hover {
+    background-color: rgb(155,222,245);
+    cursor: pointer;
 }
