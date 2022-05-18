@@ -25,11 +25,101 @@ p {
     overflow: hidden;
 }
 
-.start-game {
+
+
+/* choose difficulty */
+
+.difficulty {
+    display: flex;
+    flex-direction: column;
     position: absolute;
+    align-items: center;
+    justify-content: flex-end;
+    bottom: 0;
+    margin-bottom: 10vh;
+    z-index: 10;
+    width: fit-content;
+    height: 33vw;
+    padding: 3vw;
+    background-color: rgba(240, 248, 255, 0.888);
+    border-radius: 3vw;
+    box-shadow: 0 0 1rem rgb(219, 219, 219);
+}
+
+.difficulty-text {
+    margin-bottom: 2vw;
+    font-size: 3vw;
+    color: rgb(0, 101, 151);
+    text-shadow: 0 0 2.5vw white;
+}
+
+.level-box {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    height: 6vw;
+}
+
+.change {
+    background-color: aliceblue;
+    width: 6vw;
+    height: 6vw;
+    margin: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    box-shadow: 0 0 1vw grey;
+
+}
+
+.change p {
+    font-size: 5vw;
+    pointer-events: none;
+}
+
+.change:hover {
+    background-color: rgb(125, 212, 255);
+    cursor: pointer;
+}
+
+.change p::selection {
+    background-color: transparent;
+}
+
+.levels-container {
+    overflow: hidden;
+    width: 55%;
+}
+
+.levels {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    column-gap: 50%;
+    padding: 5%;
+    width: 100%;
+    margin-left: 0%;
+    transition: margin-left 0.2s;
+}
+
+.level {
+    padding: 10% 20%;
+}
+
+.level p {
+    font-size: 6vw;
+}
+
+.wiz p {
+    text-shadow: 0 0 1.5vw rgb(208, 0, 208);
+}
+
+.start-game {
+    position: relative;
     width: 60%;
     animation: idle 3s infinite ;
-    z-index: 5;
 }
 
 .start-game h1 {
@@ -40,23 +130,23 @@ p {
 
 @keyframes idle {
     0% {
-        bottom: 40vh;
+        bottom: 5vh;
         animation-timing-function: ease-out;
     }
     25% {
-        bottom: 41vh;
+        bottom: 6vh;
         animation-timing-function: ease-in;
     }
     50% {
-        bottom: 40vh;
+        bottom: 5vh;
         animation-timing-function: ease-out;
     }
     75% {
-        bottom: 39vh;
+        bottom: 4vh;
         animation-timing-function: ease-in;
     }
     100% {
-        bottom: 40vh;
+        bottom: 5vh;
     }
 }
 
@@ -220,15 +310,15 @@ p {
     justify-content: center;
     align-items: center;
     width: fit-content;
-    padding: 4vw;
+    padding: 3vw;
     background-color: rgba(240, 248, 255, 0.888);
     border-radius: 3vw;
     box-shadow: 0 0 1rem rgb(219, 219, 219);
-    z-index: 6;
+    z-index: 10;
 }
 
 .game-over h1 {
-    margin-bottom: 5%;;
+    margin-bottom: 3vw;
 }
 
 .restart-button {

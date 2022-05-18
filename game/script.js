@@ -1,12 +1,15 @@
 // --- game animations that are linked to key press events should check if the game is started!
-// --- spent event listeners should be removed!
+
 
 const allKeys = document.querySelector(".keys");
-const pressAnyKey = document.querySelector(".start-game");
+const chooseLevel = document.querySelector(".difficulty");
 const trail = document.querySelector(".trail-box");
 const lives = document.querySelectorAll(".life");
 const gameOverScreen = document.querySelector(".game-over");
 const restartButton = document.querySelector(".restart-button");
+const levels = document.querySelector(".levels");
+const back = document.querySelector(".back");
+const forward = document.querySelector(".forward");
 let keysArray = document.querySelectorAll(".key");
 let charArray = document.querySelectorAll(".char");
 
@@ -17,11 +20,13 @@ let charSetLength = charSet.length;
 
 let gameStarted = false;
 
+let difficulty = 1; // min = 1 ; max = 4
+
 window.onload = randomKeys(charArray);
 
-const fallingTime = 4000; // how long it takes for a key to fall
+let fallingTime; // how long it takes for a key to fall
 
-const fallDistance = 70; // must match the css value in fallDown animation;
+let fallDistance = 70; // must match the css value in fallDown animation;
 
 let animationTime = 300; 
 
@@ -40,8 +45,14 @@ let currentLives = 5;
 
 function startGame() { 
     if (!gameStarted) {
-        pressAnyKey.style.animation = "none";
-        pressAnyKey.style.display = "none";
+        switch (difficulty) {
+            case 1: fallingTime = 4000; break;
+            case 2: fallingTime = 2500; break;
+            case 3: fallingTime = 1000; break;
+            case 4: fallingTime = 500; break;
+        };
+        fallingSpeed = fallDistance/fallingTime;
+        chooseLevel.style.display = "none";
         setTimeout(() => {
             gameStarted = true;
             isPressed = true; 
@@ -51,6 +62,28 @@ function startGame() {
 }
 
 window.addEventListener("keypress", startGame);
+
+
+function changeDifficulty(event) {
+    if (event.target.children[0].textContent == "<" && difficulty > 1) {
+        difficulty --;
+        switch (difficulty) {
+            case 1: levels.style.marginLeft = "0%"; break;
+            case 2: levels.style.marginLeft = "-128%"; break;
+            case 3: levels.style.marginLeft = "-245%"; break;	
+        };
+    } else if (event.target.children[0].textContent == ">" && difficulty < 4) {
+        difficulty ++;
+        switch (difficulty) {
+            case 2: levels.style.marginLeft = "-128%"; break;
+            case 3: levels.style.marginLeft = "-245%"; break;
+            case 4: levels.style.marginLeft = "-370%"; break;	
+        };
+    }
+}
+
+back.addEventListener("click", changeDifficulty);
+forward.addEventListener("click", changeDifficulty);
 
 // starts falling, sets timer, loops the animation
 
@@ -158,7 +191,6 @@ function randomKey() {
         randomChar = charSet[randomNumber];
         return randomChar;
 }
-console.log(randomKey(keysArray[1]));
 
 function randomKeys(array) {
     if (!gameStarted) {
@@ -238,8 +270,7 @@ function gameOver() {
         window.addEventListener("keypress", startGame);
         randomKeys(charArray); // to be fixed! doesnt work here for some reason;
         gameOverScreen.style.display = "none";
-        pressAnyKey.style.animation = "";
-        pressAnyKey.style.display = "";
+        chooseLevel.style.display = "";
         restoreLives();
     });
 }
