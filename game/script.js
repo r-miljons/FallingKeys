@@ -279,7 +279,13 @@ function gameOver() {
     window.removeEventListener("keypress", startGame);
     gameOverScreen.style.display = "flex";
     scoreBox.style.display = "none";
-    restartButton.addEventListener("click", function() {
+    window.addEventListener("keypress", restartGame)
+    restartButton.addEventListener("click", restartGame);
+}
+
+function restartGame() {
+    if (!gameStarted) {
+        window.removeEventListener("keypress", restartGame);
         window.addEventListener("keydown", pressKey);
         window.addEventListener("keydown", returnPressedKey);
         window.addEventListener("keypress", startGame);
@@ -290,6 +296,9 @@ function gameOver() {
         scoreBox.style.display = "";
         chooseLevel.style.display = "";
         restoreLives();
-        
-    });
+    }
 }
+
+
+
+
