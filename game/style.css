@@ -347,3 +347,6 @@ p {
     background-color: rgb(155,222,245);
     cursor: pointer;
 }
+.restart-button p {
+    font-size: 2vw;
+}
