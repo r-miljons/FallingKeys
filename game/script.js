@@ -10,6 +10,8 @@ const restartButton = document.querySelector(".restart-button");
 const levels = document.querySelector(".levels");
 const back = document.querySelector(".back");
 const forward = document.querySelector(".forward");
+const scoreText = document.querySelectorAll(".score");
+const scoreBox = document.querySelector(".score-box");
 let keysArray = document.querySelectorAll(".key");
 let charArray = document.querySelectorAll(".char");
 
@@ -23,6 +25,8 @@ let gameStarted = false;
 let difficulty = 1; // min = 1 ; max = 4
 
 window.onload = randomKeys(charArray);
+
+let currentScore = 0;
 
 let fallingTime; // how long it takes for a key to fall
 
@@ -63,6 +67,7 @@ function startGame() {
 
 window.addEventListener("keypress", startGame);
 
+// difficulty - changes the falling speed
 
 function changeDifficulty(event) {
     if (event.target.children[0].textContent == "<" && difficulty > 1) {
@@ -227,6 +232,7 @@ function keyChecker() {
     if (keysArray[0].textContent.includes(keyPressed)) {
         succeeded = true;
         changeKeyColor();
+        changeScore(10);
     } else {
         succeeded = false;
         changeKeyColor();
@@ -256,6 +262,14 @@ function restoreLives() {
     lives[4].style.animation = "none";
 }
 
+// tracks the score
+
+function changeScore(score) {
+    currentScore += Math.floor(((fallingTime - timeElapsed)/ 1000) * score);
+    scoreText[0].textContent = currentScore;
+    scoreText[1].textContent = currentScore;
+}
+
 // game over
 
 function gameOver() {
@@ -264,13 +278,18 @@ function gameOver() {
     window.removeEventListener("keydown", returnPressedKey);
     window.removeEventListener("keypress", startGame);
     gameOverScreen.style.display = "flex";
+    scoreBox.style.display = "none";
     restartButton.addEventListener("click", function() {
         window.addEventListener("keydown", pressKey);
         window.addEventListener("keydown", returnPressedKey);
         window.addEventListener("keypress", startGame);
         randomKeys(charArray); // to be fixed! doesnt work here for some reason;
         gameOverScreen.style.display = "none";
+        currentScore = 0;
+        scoreText[0].textContent = currentScore;
+        scoreBox.style.display = "";
         chooseLevel.style.display = "";
         restoreLives();
+        
     });
 }

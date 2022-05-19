@@ -35,13 +35,11 @@ p {
     position: absolute;
     align-items: center;
     justify-content: flex-end;
-    bottom: 0;
-    margin-bottom: 10vh;
     z-index: 10;
     width: fit-content;
     height: 33vw;
     padding: 3vw;
-    background-color: rgba(240, 248, 255, 0.888);
+    background-color: rgb(240, 248, 255);
     border-radius: 3vw;
     box-shadow: 0 0 1rem rgb(219, 219, 219);
 }
@@ -202,6 +200,22 @@ p {
     }
 }
 
+/* score */
+
+.score-box {
+    text-align: center;
+    top: 0;
+    position: absolute;
+    width: max-content;
+    margin-top: 1vw;
+}
+
+.score {
+    font-size: 3.5vw;
+    text-shadow: 0 0 1rem rgb(113, 113, 113);
+    margin-bottom: 1.5vw;
+}
+
 /* keys section */
 
 .keys-section {
@@ -318,7 +332,8 @@ p {
 }
 
 .game-over h1 {
-    margin-bottom: 3vw;
+    margin-bottom: 1.5vw;
+    font-size: 4vw;
 }
 
 .restart-button {
