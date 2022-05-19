@@ -229,7 +229,7 @@ function returnPressedKey(event) {
 }
 
 function keyChecker() {
-    if (keysArray[0].textContent.includes(keyPressed)) {
+    if (keysArray[0].textContent.trim().includes(keyPressed)) {
         succeeded = true;
         changeKeyColor();
         changeScore(10);
