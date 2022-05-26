@@ -37,6 +37,7 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
     width: fit-content;
     padding: 5%;
     background-color: rgba(240, 248, 255, 0.673);
@@ -46,21 +47,21 @@ p {
 
 @keyframes fallDown {
     0% {
-        bottom: 40vh;
-        animation-timing-function: linear;
+        animation-timing-function: ease-out;
         transform: rotateX(0deg) rotateY(0deg);
+        transform: translateY(0);
         transform-style: preserve-3d; 
     }
     30% {
         transform: rotateX(-2deg) rotateY(0deg);
-        transform-style: preserve-3d; 
-        bottom: 42vh; 
+        transform: translateY(-20px);
+        transform-style: preserve-3d;
         animation-timing-function: cubic-bezier(.63,.03,.77,.56);
     }
     100% {
-        bottom: -100vh;
         transform: rotateX(10deg) rotateY(0deg);
         transform-style: preserve-3d;
+        transform: translateY(500px);
     }
 }
 
